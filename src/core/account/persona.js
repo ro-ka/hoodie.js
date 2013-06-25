@@ -12,8 +12,6 @@ Hoodie.PersonaAccount  = (function (navigator) {
   function PersonaAccount(account) {
     this.account = account;
     this.hoodie = account.hoodie;
-
-    this._handlePopupCallback = this._handlePopupCallback.bind(this);
   }
 
   // 
@@ -156,12 +154,16 @@ Hoodie.PersonaAccount  = (function (navigator) {
   // 
   PersonaAccount.prototype._handleUserAccountAmendmentSuccess = function() {
     this.account.trigger('signup', this.username);
+
+    // Unfortunately, updating the _users document appears to
+    // terminate my login session.  Sign back in.
     this._submitAssertion();
   };
 
 
-  // 
-  // 
+  // We now have to wait for the server-side worker to confirm
+  // the account, create DBs etc.
+  // XXX TODO: skip this loop if doc is already confirmed.
   // 
   PersonaAccount.prototype._waitForConfirmation = function(defer) {
 
