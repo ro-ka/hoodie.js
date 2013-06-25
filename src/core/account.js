@@ -273,6 +273,27 @@ Hoodie.Account = (function () {
   };
 
 
+  // sign in with "provider"
+  // -----------------------
+
+  // uses providers to sign into an account. If the user account
+  // does not yet exist, it gets created automatically.
+  // 
+  // Currently support is Mozilla's "persona". More to follow
+  //
+  Account.prototype.signInWith = function(providerName) {
+    var provider;
+
+    switch(providerName) {
+    case 'persona':
+      provider = new Hoodie.PersonaAccount(this);
+      return provider.signIn();
+    }
+
+    return this.hoodie.rejectWith({error: providerName + " is not yet supported."});
+  };
+
+
   // sign out
   // ---------
   //
@@ -327,8 +348,7 @@ Hoodie.Account = (function () {
   // shortcut for `hoodie.request`
   //
   Account.prototype.request = function(type, path, options) {
-    options = options || {};
-    return this.hoodie.request.apply(this, arguments);
+    return this.hoodie.request.apply(this.hoodie, arguments);
   };
 
 

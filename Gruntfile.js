@@ -36,6 +36,7 @@ module.exports = function(grunt) {
           'src/core/remote.js',
           'src/core/account_remote.js',
           'src/core/local_store.js',
+          'src/core/account/persona.js',
           'src/extensions/email.js',
           'src/extensions/share.js',
           'src/extensions/user.js',
