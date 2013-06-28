@@ -1,15 +1,16 @@
-// Hoodie.PersonaAccount
-// =====================
+// adding Persona as Hoodie.Account Provider 
+// =========================================
 
 // The future is here:
 // https://developer.mozilla.org/en-US/docs/Mozilla/Persona
 //
+// <3
 
-Hoodie.PersonaAccount  = (function (navigator) {
+(function (Account, navigator) {
 
   'use strict';
 
-  function PersonaAccount(account) {
+  function Persona(account) {
     this.account = account;
     this.hoodie = account.hoodie;
   }
@@ -17,8 +18,8 @@ Hoodie.PersonaAccount  = (function (navigator) {
   // 
   // 
   // 
-  PersonaAccount.prototype.signIn = function() {
-    // Probably we can do something useful here, but I don't know what.
+  Persona.prototype.signIn = function() {
+    // Probably we can do something useful here, not sure what just yet.
     if (this.account.hasAnonymousAccount()) {
       return this.hoodie.rejectWith({
         error: 'cant be used with anonymous account'
@@ -44,7 +45,7 @@ Hoodie.PersonaAccount  = (function (navigator) {
   // 
   // 
   // 
-  PersonaAccount.prototype._handlePopupCallback = function(assertion) {
+  Persona.prototype._handlePopupCallback = function(assertion) {
 
     if (!assertion) {
       return this.result.reject('signin cancelled');
@@ -58,7 +59,7 @@ Hoodie.PersonaAccount  = (function (navigator) {
   // Submit the assertion to /_browserid.
   // This will log us in as well as produce some info about the user.
   // 
-  PersonaAccount.prototype._submitAssertion = function() {
+  Persona.prototype._submitAssertion = function() {
     var options = {
       data: JSON.stringify({ assertion: this.assertion }),
       contentType: 'application/json'
@@ -72,7 +73,7 @@ Hoodie.PersonaAccount  = (function (navigator) {
   // 
   // 
   // 
-  PersonaAccount.prototype._handleAssertionSubmitError = function(errorMessage) {
+  Persona.prototype._handleAssertionSubmitError = function(errorMessage) {
     this.result.reject('login failed; ' + errorMessage);
   };
 
@@ -80,7 +81,7 @@ Hoodie.PersonaAccount  = (function (navigator) {
   // 
   // 
   // 
-  PersonaAccount.prototype._handleAssertionSubmitSuccess = function(response) {
+  Persona.prototype._handleAssertionSubmitSuccess = function(response) {
 
     this.username = response.email;
 
@@ -95,7 +96,7 @@ Hoodie.PersonaAccount  = (function (navigator) {
   // 
   // 
   // 
-  PersonaAccount.prototype._handleAccountVerificationError = function(errorMessage) {
+  Persona.prototype._handleAccountVerificationError = function(errorMessage) {
     this.result.reject('could not get user doc; ' + errorMessage);
   };
 
@@ -103,7 +104,7 @@ Hoodie.PersonaAccount  = (function (navigator) {
   // 
   // 
   // 
-  PersonaAccount.prototype._handleAccountVerificationSuccess = function(response) {
+  Persona.prototype._handleAccountVerificationSuccess = function(response) {
 
     // The _users document is incomplete, fill in missing details.
     // that will resubmit the assertion
@@ -119,7 +120,7 @@ Hoodie.PersonaAccount  = (function (navigator) {
   // 
   // 
   // 
-  PersonaAccount.prototype._ammendUserAccount = function (response) {
+  Persona.prototype._ammendUserAccount = function (response) {
     var options = {
       data: JSON.stringify({
         _id: this.account._key(this.username),
@@ -144,7 +145,7 @@ Hoodie.PersonaAccount  = (function (navigator) {
   // 
   // 
   // 
-  PersonaAccount.prototype._handleUserAccountAmendmentError = function(errorMessage) {
+  Persona.prototype._handleUserAccountAmendmentError = function(errorMessage) {
     this.result.reject('could not update user doc; ' + errorMessage);
   };
 
@@ -152,7 +153,7 @@ Hoodie.PersonaAccount  = (function (navigator) {
   // 
   // 
   // 
-  PersonaAccount.prototype._handleUserAccountAmendmentSuccess = function() {
+  Persona.prototype._handleUserAccountAmendmentSuccess = function() {
     this.account.trigger('signup', this.username);
 
     // Unfortunately, updating the _users document appears to
@@ -165,7 +166,7 @@ Hoodie.PersonaAccount  = (function (navigator) {
   // the account, create DBs etc.
   // XXX TODO: skip this loop if doc is already confirmed.
   // 
-  PersonaAccount.prototype._waitForConfirmation = function(defer) {
+  Persona.prototype._waitForConfirmation = function(defer) {
 
     if (!defer) {
       defer = this.hoodie.defer();
@@ -180,7 +181,7 @@ Hoodie.PersonaAccount  = (function (navigator) {
   // the account has been confirmed yet. If yes, resolvet
   // the passed defer, otherwise check again with `_waitForConfirmation`
   // 
-  PersonaAccount.prototype._checkUserAccountStatus = function(defer) {
+  Persona.prototype._checkUserAccountStatus = function(defer) {
     return function() {
       this.account.fetch(this.username)
       .then( this.account._handleSignInSuccess() )
@@ -194,7 +195,7 @@ Hoodie.PersonaAccount  = (function (navigator) {
   // restart the `_waitForConfirmation` timeout, otherwise reject 
   // the passed defer
   //
-  PersonaAccount.prototype._checkForUnconfirmedError = function(defer) {
+  Persona.prototype._checkForUnconfirmedError = function(defer) {
     return function(error) {
       if (error.error === 'unconfirmed') {
         return this._waitForConfirmation(defer);
@@ -204,5 +205,5 @@ Hoodie.PersonaAccount  = (function (navigator) {
     }.bind(this);
   };
 
-  return PersonaAccount;
-})(navigator);
+  Account.addProvider('persona', Persona);
+})(Hoodie.Account, navigator);
