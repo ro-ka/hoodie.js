@@ -368,7 +368,7 @@ Hoodie.Account = (function () {
   // shortcut for `hoodie.request`
   //
   Account.prototype.request = function(type, path, options) {
-    return this.hoodie.request.apply(this.hoodie, [type, path, options]);
+    return this.hoodie.request.apply(this, arguments);
   };
 
 
