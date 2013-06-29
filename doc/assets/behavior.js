@@ -30,7 +30,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                   "singleLineComment": ["//"],
                   "name": "JavaScript"
                 },
-                "sourcePath": "/Users/svenlito/Dropbox/Sites/private/hoodie.js/src/core/account.js",
+                "sourcePath": "/Users/gregor/JavaScripts/hood.ie/hoodie.js/src/core/account.js",
                 "projectPath": "src/core/account.js",
                 "targetPath": "src/core/account",
                 "firstHeader": {
@@ -44,6 +44,14 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                   "depth": 1,
                   "children": [
                     {
+                      "type": "heading",
+                      "data": {
+                        "level": 2,
+                        "title": "Add Provider",
+                        "slug": "add-provider"
+                      },
+                      "depth": 2
+                    }, {
                       "type": "heading",
                       "data": {
                         "level": 2,
@@ -105,6 +113,14 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                         "level": 2,
                         "title": "sign in with username &amp; password",
                         "slug": "sign-in-with-username-amp-password"
+                      },
+                      "depth": 2
+                    }, {
+                      "type": "heading",
+                      "data": {
+                        "level": 2,
+                        "title": "sign in with \"provider\"",
+                        "slug": "sign-in-with-provider"
                       },
                       "depth": 2
                     }, {
@@ -206,6 +222,14 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                   "type": "heading",
                   "data": {
                     "level": 2,
+                    "title": "Add Provider",
+                    "slug": "add-provider"
+                  },
+                  "depth": 2
+                }, {
+                  "type": "heading",
+                  "data": {
+                    "level": 2,
                     "title": "Properties",
                     "slug": "properties"
                   },
@@ -264,6 +288,14 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                     "level": 2,
                     "title": "sign in with username &amp; password",
                     "slug": "sign-in-with-username-amp-password"
+                  },
+                  "depth": 2
+                }, {
+                  "type": "heading",
+                  "data": {
+                    "level": 2,
+                    "title": "sign in with \"provider\"",
+                    "slug": "sign-in-with-provider"
                   },
                   "depth": 2
                 }, {
@@ -365,7 +397,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                   "singleLineComment": ["//"],
                   "name": "JavaScript"
                 },
-                "sourcePath": "/Users/svenlito/Dropbox/Sites/private/hoodie.js/src/core/account_remote.js",
+                "sourcePath": "/Users/gregor/JavaScripts/hood.ie/hoodie.js/src/core/account_remote.js",
                 "projectPath": "src/core/account_remote.js",
                 "targetPath": "src/core/account_remote",
                 "firstHeader": {
@@ -492,7 +524,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                   "singleLineComment": ["//"],
                   "name": "JavaScript"
                 },
-                "sourcePath": "/Users/svenlito/Dropbox/Sites/private/hoodie.js/src/core/config.js",
+                "sourcePath": "/Users/gregor/JavaScripts/hood.ie/hoodie.js/src/core/config.js",
                 "projectPath": "src/core/config.js",
                 "targetPath": "src/core/config",
                 "title": "config"
@@ -542,7 +574,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                   "singleLineComment": ["//"],
                   "name": "JavaScript"
                 },
-                "sourcePath": "/Users/svenlito/Dropbox/Sites/private/hoodie.js/src/core/errors.js",
+                "sourcePath": "/Users/gregor/JavaScripts/hood.ie/hoodie.js/src/core/errors.js",
                 "projectPath": "src/core/errors.js",
                 "targetPath": "src/core/errors",
                 "title": "errors"
@@ -584,7 +616,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                   "singleLineComment": ["//"],
                   "name": "JavaScript"
                 },
-                "sourcePath": "/Users/svenlito/Dropbox/Sites/private/hoodie.js/src/core/local_store.js",
+                "sourcePath": "/Users/gregor/JavaScripts/hood.ie/hoodie.js/src/core/local_store.js",
                 "projectPath": "src/core/local_store.js",
                 "targetPath": "src/core/local_store",
                 "firstHeader": {
@@ -647,7 +679,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                   "singleLineComment": ["//"],
                   "name": "JavaScript"
                 },
-                "sourcePath": "/Users/svenlito/Dropbox/Sites/private/hoodie.js/src/core/remote.js",
+                "sourcePath": "/Users/gregor/JavaScripts/hood.ie/hoodie.js/src/core/remote.js",
                 "projectPath": "src/core/remote.js",
                 "targetPath": "src/core/remote",
                 "firstHeader": {
@@ -1196,7 +1228,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                   "singleLineComment": ["//"],
                   "name": "JavaScript"
                 },
-                "sourcePath": "/Users/svenlito/Dropbox/Sites/private/hoodie.js/src/core/store.js",
+                "sourcePath": "/Users/gregor/JavaScripts/hood.ie/hoodie.js/src/core/store.js",
                 "projectPath": "src/core/store.js",
                 "targetPath": "src/core/store",
                 "firstHeader": {
@@ -1389,7 +1421,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["//"],
               "name": "JavaScript"
             },
-            "sourcePath": "/Users/svenlito/Dropbox/Sites/private/hoodie.js/src/events.js",
+            "sourcePath": "/Users/gregor/JavaScripts/hood.ie/hoodie.js/src/events.js",
             "projectPath": "src/events.js",
             "targetPath": "src/events",
             "title": "events"
@@ -1447,7 +1479,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                   "singleLineComment": ["//"],
                   "name": "JavaScript"
                 },
-                "sourcePath": "/Users/svenlito/Dropbox/Sites/private/hoodie.js/src/extensions/email.js",
+                "sourcePath": "/Users/gregor/JavaScripts/hood.ie/hoodie.js/src/extensions/email.js",
                 "projectPath": "src/extensions/email.js",
                 "targetPath": "src/extensions/email",
                 "title": "email"
@@ -1481,7 +1513,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                   "singleLineComment": ["//"],
                   "name": "JavaScript"
                 },
-                "sourcePath": "/Users/svenlito/Dropbox/Sites/private/hoodie.js/src/extensions/global.js",
+                "sourcePath": "/Users/gregor/JavaScripts/hood.ie/hoodie.js/src/extensions/global.js",
                 "projectPath": "src/extensions/global.js",
                 "targetPath": "src/extensions/global",
                 "firstHeader": {
@@ -1507,7 +1539,33 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                   "singleLineComment": ["//"],
                   "name": "JavaScript"
                 },
-                "sourcePath": "/Users/svenlito/Dropbox/Sites/private/hoodie.js/src/extensions/share.js",
+                "sourcePath": "/Users/gregor/JavaScripts/hood.ie/hoodie.js/src/extensions/persona.js",
+                "projectPath": "src/extensions/persona.js",
+                "targetPath": "src/extensions/persona",
+                "firstHeader": {
+                  "type": "heading",
+                  "data": {
+                    "level": 1,
+                    "title": "adding Persona as Hoodie.Account Provider ",
+                    "slug": "adding-persona-as-hoodieaccount-provider-",
+                    "isFileHeader": true
+                  },
+                  "depth": 1
+                },
+                "title": "adding Persona as Hoodie.Account Provider "
+              },
+              "depth": 3,
+              "outline": []
+            }, {
+              "type": "file",
+              "data": {
+                "language": {
+                  "nameMatchers": [".js"],
+                  "pygmentsLexer": "javascript",
+                  "singleLineComment": ["//"],
+                  "name": "JavaScript"
+                },
+                "sourcePath": "/Users/gregor/JavaScripts/hood.ie/hoodie.js/src/extensions/share.js",
                 "projectPath": "src/extensions/share.js",
                 "targetPath": "src/extensions/share",
                 "firstHeader": {
@@ -1784,7 +1842,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                   "singleLineComment": ["//"],
                   "name": "JavaScript"
                 },
-                "sourcePath": "/Users/svenlito/Dropbox/Sites/private/hoodie.js/src/extensions/share_instance.js",
+                "sourcePath": "/Users/gregor/JavaScripts/hood.ie/hoodie.js/src/extensions/share_instance.js",
                 "projectPath": "src/extensions/share_instance.js",
                 "targetPath": "src/extensions/share_instance",
                 "firstHeader": {
@@ -1959,7 +2017,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                   "singleLineComment": ["//"],
                   "name": "JavaScript"
                 },
-                "sourcePath": "/Users/svenlito/Dropbox/Sites/private/hoodie.js/src/extensions/user.js",
+                "sourcePath": "/Users/gregor/JavaScripts/hood.ie/hoodie.js/src/extensions/user.js",
                 "projectPath": "src/extensions/user.js",
                 "targetPath": "src/extensions/user",
                 "firstHeader": {
@@ -2008,7 +2066,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["//"],
               "name": "JavaScript"
             },
-            "sourcePath": "/Users/svenlito/Dropbox/Sites/private/hoodie.js/src/hoodie.js",
+            "sourcePath": "/Users/gregor/JavaScripts/hood.ie/hoodie.js/src/hoodie.js",
             "projectPath": "src/hoodie.js",
             "targetPath": "src/hoodie",
             "title": "hoodie"
@@ -2114,7 +2172,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["//"],
               "name": "JavaScript"
             },
-            "sourcePath": "/Users/svenlito/Dropbox/Sites/private/hoodie.js/src/utils.js",
+            "sourcePath": "/Users/gregor/JavaScripts/hood.ie/hoodie.js/src/utils.js",
             "projectPath": "src/utils.js",
             "targetPath": "src/utils",
             "title": "utils"

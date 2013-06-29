@@ -4561,7 +4561,7 @@ Hoodie.ShareInstance = (function(_super) {
 //
 // <3
 
-(function (Account, navigator) {
+(function (Account, window, navigator) {
 
   'use strict';
 
@@ -4577,7 +4577,7 @@ Hoodie.ShareInstance = (function(_super) {
     // Probably we can do something useful here, not sure what just yet.
     if (this.account.hasAnonymousAccount()) {
       return this.hoodie.rejectWith({
-        error: 'cant be used with anonymous account'
+        error: "can't be used with anonymous account"
       });
     }
 
@@ -4621,15 +4621,17 @@ Hoodie.ShareInstance = (function(_super) {
     };
 
     this.account.request('POST', '/_browserid', options)
-    .then( this._handleAssertionSubmitSuccess.bind(this), this._handleAssertionSubmitError.bind(this) );
+    .then( this._handleAssertionSubmitSuccess.bind(this), this._handleError('login failed') );
   };
 
 
   // 
   // 
   // 
-  Persona.prototype._handleAssertionSubmitError = function(errorMessage) {
-    this.result.reject('login failed; ' + errorMessage);
+  Persona.prototype._handleError = function(errorMessage) {
+    return function(reasonMessage) {
+      this.result.reject(errorMessage + '; ' + reasonMessage);
+    }.bind(this);
   };
 
 
@@ -4644,15 +4646,7 @@ Hoodie.ShareInstance = (function(_super) {
     // will have created a stub _users document.  We need to fill in
     // all the extra hoodie goodies.
     this.account.fetch(this.username)
-    .then( this._handleAccountVerificationSuccess.bind(this), this._handleAccountVerificationError.bind(this) );
-  };
-
-
-  // 
-  // 
-  // 
-  Persona.prototype._handleAccountVerificationError = function(errorMessage) {
-    this.result.reject('could not get user doc; ' + errorMessage);
+    .then( this._handleAccountVerificationSuccess.bind(this), this._handleError('could not get user doc') );
   };
 
 
@@ -4668,7 +4662,7 @@ Hoodie.ShareInstance = (function(_super) {
       return;
     }
 
-    this._waitForConfirmation().then( this.result.resolve, this.result.reject);
+    this._waitForConfirmation().then( this.result.resolve, this.result.reject );
   };
 
 
@@ -4693,15 +4687,7 @@ Hoodie.ShareInstance = (function(_super) {
     };
 
     this.account.request('PUT', this.account._url(this.username), options)
-    .then( this._handleUserAccountAmendmentSuccess.bind(this), this._handleUserAccountAmendmentError.bind(this) );
-  };
-
-
-  // 
-  // 
-  // 
-  Persona.prototype._handleUserAccountAmendmentError = function(errorMessage) {
-    this.result.reject('could not update user doc; ' + errorMessage);
+    .then( this._handleUserAccountAmendmentSuccess.bind(this), this._handleError('could not update user doc') );
   };
 
 
@@ -4761,4 +4747,4 @@ Hoodie.ShareInstance = (function(_super) {
   };
 
   Account.addProvider('persona', Persona);
-})(Hoodie.Account, navigator);
+})(Hoodie.Account, window, navigator);

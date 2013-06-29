@@ -28,12 +28,11 @@ hoodie = new Hoodie
 
 <pre><code>promise = hoodie.request('GET', '/user_database/doc_id')
 </code></pre></div></div><div class="code"><div class="wrapper">  <span class="nx">Hoodie</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">request</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">defaults</span><span class="p">;</span>
     <span class="nx">options</span> <span class="o">=</span> <span class="nx">options</span> <span class="o">||</span> <span class="p">{};</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>if a relative path passed, prefix with @baseUrl</p></div></div><div class="code"><div class="wrapper">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="sr">/^http/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">url</span><span class="p">))</span> <span class="p">{</span>
       <span class="nx">url</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">baseUrl</span> <span class="o">+</span> <span class="nx">url</span><span class="p">;</span>
     <span class="p">}</span>
 
-    <span class="nx">defaults</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">defaults</span> <span class="o">=</span> <span class="p">{</span>
       <span class="nx">type</span><span class="o">:</span> <span class="nx">type</span><span class="p">,</span>
       <span class="nx">url</span><span class="o">:</span> <span class="nx">url</span><span class="p">,</span>
       <span class="nx">xhrFields</span><span class="o">:</span> <span class="p">{</span>
@@ -63,11 +62,18 @@ and then each 30 seconds. If it fails, it</p>
 <li>sets <code>checkConnectionInterval = 30000</code></li>
 </ul></div></div><div class="code"><div class="wrapper">  <span class="nx">Hoodie</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_checkConnectionRequest</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
   <span class="nx">Hoodie</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">checkConnection</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_checkConnectionRequest</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="nx">_checkConnectionRequest</span><span class="p">.</span><span class="nx">state</span><span class="p">()</span> <span class="o">===</span> <span class="s1">&#39;pending&#39;</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_checkConnectionRequest</span><span class="p">;</span>
+
+    <span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_checkConnectionRequest</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">req</span> <span class="o">&amp;&amp;</span> <span class="nx">req</span><span class="p">.</span><span class="nx">state</span><span class="p">()</span> <span class="o">===</span> <span class="s1">&#39;pending&#39;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">req</span><span class="p">;</span>
     <span class="p">}</span>
 
-    <span class="k">this</span><span class="p">.</span><span class="nx">_checkConnectionRequest</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">).</span><span class="nx">pipe</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_handleCheckConnectionSuccess</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_handleCheckConnectionError</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">_checkConnectionRequest</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">).</span><span class="nx">pipe</span><span class="p">(</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">_handleCheckConnectionSuccess</span><span class="p">,</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">_handleCheckConnectionError</span>
+    <span class="p">);</span>
+
     <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_checkConnectionRequest</span><span class="p">;</span>
   <span class="p">};</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="open-stores">Open stores</h2></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>generic method to open a store. Used by</p>
 
@@ -80,9 +86,11 @@ and then each 30 seconds. If it fails, it</p>
 <p>hoodie.open("some<em>store</em>name").findAll()</p></li>
 </ul></div></div><div class="code"><div class="wrapper">  <span class="nx">Hoodie</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">open</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">storeName</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">options</span> <span class="o">=</span> <span class="nx">options</span> <span class="o">||</span> <span class="p">{};</span>
+
     <span class="nx">$</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="p">{</span>
       <span class="nx">name</span><span class="o">:</span> <span class="nx">storeName</span>
     <span class="p">});</span>
+
     <span class="k">return</span> <span class="k">new</span> <span class="nx">Hoodie</span><span class="p">.</span><span class="nx">Remote</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
   <span class="p">};</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="uuid">uuid</h2></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>helper to generate unique ids.</p></div></div><div class="code"><div class="wrapper">  <span class="nx">Hoodie</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">uuid</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">len</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">chars</span><span class="p">,</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">radix</span><span class="p">;</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>default uuid length to 7</p></div></div><div class="code"><div class="wrapper">    <span class="k">if</span> <span class="p">(</span><span class="nx">len</span> <span class="o">===</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
@@ -92,12 +100,13 @@ We stick to lowercase letters to prevent confusion
 and to prevent issues with CouchDB, e.g. database
 names do wonly allow for lowercase letters.</p></div></div><div class="code"><div class="wrapper">    <span class="nx">chars</span> <span class="o">=</span> <span class="s1">&#39;0123456789abcdefghijklmnopqrstuvwxyz&#39;</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
     <span class="nx">radix</span> <span class="o">=</span> <span class="nx">chars</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>eehmm, yeah.</p></div></div><div class="code"><div class="wrapper">    <span class="k">return</span> <span class="p">((</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-      <span class="kd">var</span> <span class="nx">_i</span><span class="p">,</span> <span class="nx">_results</span><span class="p">;</span>
-      <span class="nx">_results</span> <span class="o">=</span> <span class="p">[];</span>
+      <span class="kd">var</span> <span class="nx">_i</span><span class="p">,</span> <span class="nx">_results</span> <span class="o">=</span> <span class="p">[];</span>
+
       <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="nx">_i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="nx">len</span> <span class="o">?</span> <span class="nx">_i</span> <span class="o">&lt;</span> <span class="nx">len</span> <span class="o">:</span> <span class="nx">_i</span> <span class="o">&gt;</span> <span class="nx">len</span><span class="p">;</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="nx">len</span> <span class="o">?</span> <span class="o">++</span><span class="nx">_i</span> <span class="o">:</span> <span class="o">--</span><span class="nx">_i</span><span class="p">)</span> <span class="p">{</span>
         <span class="kd">var</span> <span class="nx">rand</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="nx">radix</span><span class="p">;</span>
         <span class="nx">_results</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">chars</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">String</span><span class="p">(</span><span class="nx">rand</span><span class="p">).</span><span class="nx">charAt</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
       <span class="p">}</span>
+
       <span class="k">return</span> <span class="nx">_results</span><span class="p">;</span>
     <span class="p">})()).</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
   <span class="p">};</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="defers--promises">Defers / Promises</h2></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>returns a defer object for custom promise handlings.
@@ -156,6 +165,7 @@ hoodie.magic2.doSomethingElse()
         <span class="k">this</span><span class="p">[</span><span class="nx">instanceName</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Module</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
       <span class="p">}</span>
     <span class="p">}</span>
+
   <span class="p">};</span></div></div></div><div class="segment"><div class="code"><div class="wrapper">  <span class="nx">Hoodie</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_handleCheckConnectionSuccess</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">checkConnectionInterval</span> <span class="o">=</span> <span class="mi">30000</span><span class="p">;</span>
 
