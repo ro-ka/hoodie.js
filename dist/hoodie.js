@@ -4574,7 +4574,7 @@ Hoodie.ShareInstance = (function(_super) {
   // 
   // 
   Persona.prototype.signIn = function() {
-    // Probably we can do something useful here, but I don't know what.
+    // Probably we can do something useful here, not sure what just yet.
     if (this.account.hasAnonymousAccount()) {
       return this.hoodie.rejectWith({
         error: 'cant be used with anonymous account'
