@@ -6,7 +6,7 @@
 //
 // <3
 
-(function (Account, navigator) {
+(function (Account, window, navigator) {
 
   'use strict';
 
@@ -206,4 +206,4 @@
   };
 
   Account.addProvider('persona', Persona);
-})(Hoodie.Account, navigator);
+})(Hoodie.Account, window, navigator);
