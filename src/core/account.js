@@ -396,6 +396,21 @@ Hoodie.Account = (function () {
       }).promise();
     }
 
+    var hash = btoa("" + this.username + ":" + currentPassword),
+      options = {
+        headers: {
+          Authorization: "Basic " + hash
+        }
+      };
+
+    this.request('GET', '/_users', options)
+      .done(function() {
+        console.log('DONE', arguments);
+      })
+      .fail(function() {
+        console.log('FAIL', arguments);
+      });
+
     this.hoodie.remote.disconnect();
 
     return this.fetch().pipe(
